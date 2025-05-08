@@ -16,10 +16,11 @@ namespace Clinic_Appointment_System
 
             bool quit = false;
 
+            Console.Write("Enter your choice (1-7): ");
+            int choice = int.Parse(Console.ReadLine());
             while (quit)
             {
-                Console.Write("Enter your choice (1-7): ");
-                int choice = int.Parse(Console.ReadLine());
+
                 switch (choice)
                 {
                     case 1:
