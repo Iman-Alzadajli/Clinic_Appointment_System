@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinic_Appointment_System.Models
 {
-    internal class Admin
+    internal class Staff
     {
     }
 }
