@@ -9,18 +9,18 @@ namespace Clinic_Appointment_System
             Console.WriteLine("=========================================");
             Console.WriteLine("Welcome to Oman Clinic Appointment System");
             Console.WriteLine("=========================================\n");
-            Console.WriteLine("1. Register new patient\n2. Add new doctor\n3. Search doctor by specility\n4. Book appointment\n5. View patient appointments\n6.View all appointment\n7. Exit");
 
             List<Patient> patients = new List<Patient>();
             List<Doctor> doctors = new List<Doctor>();
 
-            bool quit = false;
+            bool quit = true;
 
-            Console.Write("Enter your choice (1-7): ");
-            int choice = int.Parse(Console.ReadLine());
             while (quit)
             {
-
+                Console.WriteLine("1. Register new patient\n2. Add new doctor\n3. Search doctor by specility\n4. Book appointment\n5. View patient appointments\n6.View all appointment\n7. Exit");
+                Console.Write("\nEnter your choice (1-7): ");
+                int choice = int.Parse(Console.ReadLine());
+                
                 switch (choice)
                 {
                     case 1:
@@ -34,19 +34,48 @@ namespace Clinic_Appointment_System
                         patients.Add(new Patient(id, name, phone));
                         // add error checker
                         Console.WriteLine("Patient registered successfully!");
-
-
-
                         break;
-                    case 2:
-                        Console.WriteLine("1. Add new doctor");
 
+                    case 2:
+                        Console.WriteLine("-- Register new Doctor -- ");
+                        Console.Write("Enter Doctor Name: ");
+                        string named = Console.ReadLine();
+                        Console.Write("Enter National ID: ");
+                        int idd = int.Parse(Console.ReadLine());
+                        Console.Write("Enter Specialty : ");
+                        string sp= Console.ReadLine();
+                        Console.Write("Enter Phone Number: ");
+                        int phoned = int.Parse(Console.ReadLine());
+                        doctors.Add(new Doctor(idd, named, phoned ,sp));
+                        // add error checker
+                        Console.WriteLine("Patient registered successfully!");
 
                         break;
                     case 3:
-                        Console.WriteLine("3. Search doctor by specility");
+                        Console.WriteLine("--Search doctor by specility--");
+                        Console.Write("Enter Specialty to search : ");
+                        string checksp = Console.ReadLine();
+
+                        if((checksp.ToLower() != "pediatrics")  || (checksp.ToLower() != "Cardiology") || (checksp.ToLower() != "Dermtology"))
+                        {
+                            Console.WriteLine("Invalid");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Doctor found!");
+                            foreach (Doctor d in doctors)
+                            {
+                                if (checksp.ToLower() == d.Specialty)
+                                {
+                                    Console.WriteLine($"Dr. {d.Name} | Phone: {d.Phone}");
+                                }
+                            }
+
+                        }
 
                         break;
+
                     case 4:
                         Console.WriteLine("4. Book appointment\n");
 
@@ -61,6 +90,7 @@ namespace Clinic_Appointment_System
                         break;
                     case 7:
                         Console.WriteLine("7. Exit");
+                        quit = false;
 
                         break;
                     default:
