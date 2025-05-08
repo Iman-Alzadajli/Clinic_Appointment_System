@@ -12,6 +12,7 @@ namespace Clinic_Appointment_System
 
             List<Patient> patients = new List<Patient>();
             List<Doctor> doctors = new List<Doctor>();
+            List<Appointment> appointment = new List<Appointment>();
 
             bool quit = true;
 
@@ -53,43 +54,75 @@ namespace Clinic_Appointment_System
                         break;
                     case 3:
                         Console.WriteLine("--Search doctor by specility--");
-                        Console.Write("Enter Specialty to search : ");
-                        string checksp = Console.ReadLine();
+                        Console.Write("Enter Specialty to search: ");
+                        string specilty = Console.ReadLine();
 
-                        if((checksp.ToLower() != "pediatrics")  || (checksp.ToLower() != "Cardiology") || (checksp.ToLower() != "Dermtology"))
+                        foreach (Doctor d in doctors)
                         {
-                            Console.WriteLine("Invalid");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Doctor found!");
-                            foreach (Doctor d in doctors)
+                            if(d.Specialty == specilty)
                             {
-                                if (checksp.ToLower() == d.Specialty)
-                                {
-                                    Console.WriteLine($"Dr. {d.Name} | Phone: {d.Phone}");
-                                }
+                                Console.WriteLine($"Dr.{d.Name} | Phone: {d.Phone}");
                             }
-
                         }
 
                         break;
 
                     case 4:
-                        Console.WriteLine("4. Book appointment\n");
+                        Console.WriteLine("-- Book appointment --");
+                        Console.Write("Enter Patient National ID: ");
+                        int PID = int.Parse(Console.ReadLine());
 
+                        Patient tempP =  null;
+                        foreach(Patient pat in patients)
+                        {
+                            if(pat.NationalID == PID)
+                            {
+                                tempP = pat;
+                            }
+                        }
+
+                        Console.Write("Enter Doctor Name: ");
+                        string nameDr = Console.ReadLine();
+
+                        Doctor tempD = null;
+                        foreach (Doctor d in doctors)
+                        {
+                            if (d.Name == nameDr)
+                            {
+                                tempD = d;
+                            }
+                        }
+
+                        Console.Write("Enter appointment date (dd/mm/yyyy): ");
+                        string date = Console.ReadLine();
+
+                        appointment.Add(new Appointment(date, tempD, tempP));
+
+                        Console.WriteLine("Appintment booked successfully!");
                         break;
-                    case 5:
-                        Console.WriteLine("5. View patient appointments\n");
 
+                    case 5:
+                        Console.WriteLine("-- View patient appointments--\n");
+                        Console.Write("Enter Patient National ID: ");
+                        int PaitentID = int.Parse(Console.ReadLine());
+
+                        foreach (Appointment a in appointment)
+                        {
+                            if (a.Patient.NationalID == PaitentID){
+                                Console.WriteLine($"Appointments for {a.Patient.Name}:");
+                                Console.WriteLine($"Date: {a.Date} | Doctor: {a.Doctor.Name} | Spitiality: {a.Doctor.Specialty}");
+                            }
+                        }
                         break;
                     case 6:
-                        Console.WriteLine("6.View all appointment\n");
-
+                        Console.WriteLine("--View all appointment--\n");
+                        foreach (Appointment a in appointment)
+                        {
+                            Console.WriteLine($"Patient: {a.Patient.Name} | Doctor: {a.Doctor.Name} | Date: {a.Date} | Spitiality: {a.Doctor.Specialty}");
+                        }
                         break;
                     case 7:
-                        Console.WriteLine("7. Exit");
+                        Console.WriteLine("Thank you for using the System. Good Bye!");
                         quit = false;
 
                         break;

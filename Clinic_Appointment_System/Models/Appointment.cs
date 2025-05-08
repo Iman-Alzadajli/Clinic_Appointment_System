@@ -9,7 +9,7 @@ namespace Clinic_Appointment_System.Models
     internal class Appointment
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public Doctor Doctor { get; set; }
         // public int / { get; set; }
@@ -17,9 +17,9 @@ namespace Clinic_Appointment_System.Models
         // public int PatientId { get; set; }
 
 
-        public Appointment(int id, DateTime date, Doctor doctor, Patient patient)
+        public Appointment(string date, Doctor doctor, Patient patient)
         {
-            this.Id = id;
+            //this.Id = id;
             this.Date = date;
             this.Doctor = doctor;
             this.Patient = patient;
