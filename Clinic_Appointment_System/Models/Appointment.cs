@@ -12,22 +12,21 @@ namespace Clinic_Appointment_System.Models
         public DateTime Date { get; set; }
 
         public Doctor Doctor { get; set; }
-        public int DoctorId { get; set; }
+        // public int / { get; set; }
         public Patient Patient { get; set; }
-        public int PatientId { get; set; }
+        // public int PatientId { get; set; }
 
 
-        public Appointment(int id, DateTime date, Doctor doctor, int doctorId, Patient patient, int patientId)
+        public Appointment(int id, DateTime date, Doctor doctor, Patient patient)
         {
             this.Id = id;
             this.Date = date;
             this.Doctor = doctor;
-            this.DoctorId = doctorId;
             this.Patient = patient;
-            this.PatientId = patientId;
+
         }
+
+
     }
-
-
 }
 

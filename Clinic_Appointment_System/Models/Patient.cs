@@ -8,16 +8,17 @@ namespace Clinic_Appointment_System.Models
 {
     public class Patient
     {
-        public int Pid { get; set; }
         public string Name { get; set; }
-        public int Phone {  get; set; }
+        public int Phone { get; set; }
+        public int NationalID { get; set; }
 
-        public Patient (int Pid, string Name, int Phone)
+        public Patient(int NationalID, string Name, int Phone)
         {
-            this.Pid = Pid;
             this.Name = Name;
             this.Phone = Phone;
+            this.NationalID = NationalID;
         }
+
 
     }
 }
